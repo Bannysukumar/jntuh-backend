@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-py"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model student {
+  id          String   @id @default(uuid())
+  name        String
+  rollNumber  String   @unique
+  collegeCode String
+  fatherName  String   @default("")
+  lastUpdated DateTime @default(now())
+  marks       mark[]
+
+  @@index([rollNumber])
+}
+
+model subject {
+  id          String @id @default(uuid())
+  subjectCode String @unique
+  subjectName String
+  marks       mark[]
+}
+
+model mark {
+  id            String  @id @default(uuid())
+  studentId     String
+  subjectId     String
+  semesterCode  String
+  examCode      String
+  internalMarks String
+  externalMarks String
+  totalMarks    String
+  grades        String?
+  credits       Float?
+  rcrv          Boolean
+  graceMarks    Boolean @default(false)
+
+  student student @relation(fields: [studentId], references: [id])
+  subject subject @relation(fields: [subjectId], references: [id])
+
+  @@unique([studentId, semesterCode, examCode, subjectId, rcrv, graceMarks])
+  @@index([studentId, rcrv])
+  @@index([semesterCode, examCode])
+  @@index([examCode, rcrv])
+}
+
+model examcodes {
+  id           String  @id @default(uuid())
+  title        String
+  link         String
+  degree       String
+  regulation   String?
+  semesterCode String?
+  examCode     String?
+  rcrv         Boolean
+  releaseDate  String
+  date         String
+
+  @@unique([examCode, rcrv, date])
+  @@index([degree, regulation])
+  @@index([releaseDate])
+}
+
+model AnonPushSubscription {
+  id           Int      @id @default(autoincrement())
+  anonId       String   @unique @db.Uuid
+  rollNumber   String?
+  subscription String?
+  createdAt    DateTime @default(now())
+
+  @@index([rollNumber])
+  @@map("anon_push_subscriptions")
+}
+
+model Job {
+  id          String          @id @default(uuid())
+  title       String
+  description String
+  type        JobType
+  company     String
+  isRemote    Boolean
+  experience  String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  locations   JobOnLocation[]
+
+  @@map("job")
+}
+
+model JobLocation {
+  id           String          @id @default(uuid())
+  locationName String
+  createdAt    DateTime        @default(now())
+  jobs         JobOnLocation[]
+
+  @@map("jobLocations")
+}
+
+model JobOnLocation {
+  id         String   @id @default(uuid())
+  jobId      String
+  locationId String
+  createdAt  DateTime @default(now())
+
+  job      Job         @relation(fields: [jobId], references: [id])
+  location JobLocation @relation(fields: [locationId], references: [id])
+
+  @@unique([jobId, locationId])
+  @@map("job_on_location")
+}
+
+enum JobType {
+  INTERN
+  FULL_TIME
+  PART_TIME
+}
