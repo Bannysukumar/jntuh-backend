@@ -1,112 +1,78 @@
-# JNTUH Results BACKEND 
+# JNTUH Results BACKEND
 
-[![License](https://img.shields.io/github/license/thilakreddyy/jntuhresults-web.svg)](https://github.com/ThilakReddyy/jntuh-backend/blob/main/LICENSE)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/thilakreddyy/jntuh-backend.svg)
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fjntuhresults.dhethi.com/docs&Website-Jntuh%20Results-blue?style=flat&logo=world&logoColor=white)](https://jntuhresults.dhethi.com/docs)
+This FastAPI-based service provides access to student results, academic records, and backlog details. It integrates with PostgreSQL, Redis, and RabbitMQ for efficient data handling and messaging.
 
+[![License](https://img.shields.io/github/license/Bannysukumar/jntuh-backend)](https://github.com/Bannysukumar/jntuh-backend/blob/main/LICENSE) [![Stars](https://img.shields.io/github/stars/Bannysukumar/jntuh-backend)](https://github.com/Bannysukumar/jntuh-backend/stargazers) [![Last commit](https://img.shields.io/github/last-commit/Bannysukumar/jntuh-backend)](https://github.com/Bannysukumar/jntuh-backend/commits/main) [![Build](https://img.shields.io/github/actions/workflow/status/Bannysukumar/jntuh-backend/deploy.yml)](https://github.com/Bannysukumar/jntuh-backend/actions)
 
-This FastAPI-based service provides access to **student results, academic records, and backlog details**. It integrates with **PostgreSQL**, **Redis**, and **RabbitMQ** for efficient data handling and messaging.
+## Overview
 
-![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
-![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
-![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
-![RabbitMQ](https://img.shields.io/badge/Rabbitmq-FF6600?style=for-the-badge&logo=rabbitmq&logoColor=white)
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
-![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white)
-![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=Prometheus&logoColor=white)
-![Grafana](https://img.shields.io/badge/grafana-%23F46800.svg?style=for-the-badge&logo=grafana&logoColor=white)
+This FastAPI-based service provides access to student results, academic records, and backlog details. It integrates with PostgreSQL, Redis, and RabbitMQ for efficient data handling and messaging.
 
 
+What is actually in the repository: `.github/`, `api/`, `assests/`, `config/`, `data/`, `database/`. GitHub reports the primary language as Python.
 
+## Tech Stack
 
-##  Features  
+| Technology | Where it shows up |
+|---|---|
+| Python | Application or script code |
+| API routes | Server endpoints in the api directory |
 
-✅ **Fetch all results** for a student  
-✅ **Retrieve academic records** based on student ID  
-✅ **Check backlogs** (pending subjects)  
-✅ **Uses Redis caching** for optimized performance  
-✅ **RabbitMQ integration** for event-driven messaging  
-✅ **Docker support** for easy deployment  
+## Project Structure
 
+```text
+jntuh-backend/
+├── .github/
+├── api/
+├── assests/
+├── config/
+├── data/
+├── database/
+├── messaging/
+├── prisma/
+├── scrapers/
+├── service/
+├── subscriptions/
+├── utils/
+├── .dockerignore
+├── .env.example
+├── Dockerfile
+├── docker-compose.yml
+├── entrypoint.sh
+├── main.py
+├── main2.py
+├── prometheus.yml
+├── pyrightconfig.json
+├── requirements.txt
+```
 
-## Tech Stack  
+## Getting Started
 
-- **Backend**: FastAPI (Python)  
-- **Database**: PostgreSQL  
-- **Caching**: Redis  
-- **Messaging Queue**: RabbitMQ  
-- **Containerization**: Docker
-- **Monitoring**: Prometheus, Grafana
+```bash
+git clone https://github.com/Bannysukumar/jntuh-backend.git
+cd jntuh-backend
+pip install -r requirements.txt
+# Copy .env.example to .env and fill in the values that file lists.
+```
 
-## 🏗 System Architecture
+## API
 
-   The following diagrams illustrate the components and overall architecture of the FastAPI-based results service.
+Endpoint files present in `api/`:
 
-### **Component Diagram**  
-This diagram shows how different services interact in the system.  
-
-![Component Diagram](https://github.com/ThilakReddyy/jntuh-backend/blob/main/assests/component-diagram.png)  
-
-### **Architecture Diagram**  
-This diagram outlines the flow of requests and data within the system.  
-
-![Architecture Diagram](https://github.com/ThilakReddyy/jntuh-backend/blob/main/assests/architecture-diagram-horizontal.png)  
-
-
-## Installation & Setup  
-
-1. **Prerequisites:**
-
-   Ensure you have **Docker** and **Docker Compose** installed.
-
-2. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/thilakreddyy/jntuh-backend.git
-   ```
-   
-3. **Navigate to the project directory:**
-
-   ```bash
-   cd jntuh-backend
-   ```
-
-4. **Build and start the Docker containers:**
-
-   ```bash
-   docker-compose up --build
-   ```
-   This command will build the Docker images and start the services defined in the docker-compose.yml file.
-
-## Usage
-
-Once the application is running, access the API documentation at http://localhost:8000/docs. This interactive documentation provides details about each endpoint and allows you to test them directly.
+- `api/routes.py`
 
 ## Contributing
 
-  Contributions are welcome! Please follow these steps:
-  
-1. Fork the repository.
-2. Create a new branch (git checkout -b feature/YourFeature).
-3. Commit your changes (git commit -m 'Add YourFeature').
-4.  Push to the branch (git push origin feature/YourFeature).
-5.  Open a Pull Request.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
 ## License
 
-This project is licensed under the GPL-3.0 .
+Licensed under GPL-3.0. See [LICENSE](LICENSE).
 
-## Acknowledgements
+## Author
 
-Special thanks to all contributors and the open-source community for their invaluable support.
+[Banny Sukumar](https://github.com/Bannysukumar)
 
-<!-- readme-seo: bannysukumar -->
-
-## Open source
-
-This repository is open source and maintained by [Banny Sukumar](https://github.com/Bannysukumar). JNTUH Backend is published so other developers can study the code and contribute.
-
-## License
-
-Released under the [GPL-3.0 License](LICENSE). Copyright (c) 2026 Banny Sukumar. See [CONTRIBUTING.md](CONTRIBUTING.md) if you want to help.
+- GitHub: [@Bannysukumar](https://github.com/Bannysukumar)
+- Portfolio: [adepu-sukumar.vercel.app](https://adepu-sukumar.vercel.app/)
+- LinkedIn: [Adepu Sukumar](https://www.linkedin.com/in/adepu-sukumar-59b423351)
